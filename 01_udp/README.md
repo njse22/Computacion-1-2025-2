@@ -31,29 +31,6 @@ La interacción es una comunicación unidireccional simple:
 2. El `Sender` se ejecuta y envía un paquete UDP con el mensaje "Hola desde el Sender" a la dirección IP `192.168.131.23` en el puerto `5000`.
 3. El `Reciver` recibe el paquete, extrae el mensaje y lo muestra en la consola, finalizando su ejecución.
 
-```plantuml
-digraph Sequence_Diagram {
-    rankdir=TB;
-    node [shape=box];
 
-    subgraph cluster_Reciver {
-        label="Proceso Reciver";
-        style=dashed;
-        r1 [label="1. new DatagramSocket(5000)"];
-        r2 [label="2. socket.receive()\n(bloquea la ejecución)"];
-        r3 [label="4. Recibe el paquete y procesa"];
-        r1 -> r2 -> r3;
-    }
 
-    subgraph cluster_Sender {
-        label="Proceso Sender";
-        style=dashed;
-        s1 [label="1. new DatagramSocket()"];
-        s2 [label="2. new DatagramPacket()"]
-        s3 [label="3. socket.send()"];
-        s1 -> s2 -> s3;
-    }
-
-    s3 -> r2 [label="  UDP Packet  ", style=solid, constraint=true];
-}
-```
+![](/home/i2t/Git/icesi/2025-2/computacion1/Computacion-1-2025-2/01_udp/doc/grafico.png)
