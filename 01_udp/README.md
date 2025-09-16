@@ -31,6 +31,10 @@ La interacción es una comunicación unidireccional simple:
 2. El `Sender` se ejecuta y envía un paquete UDP con el mensaje "Hola desde el Sender" a la dirección IP `192.168.131.23` en el puerto `5000`.
 3. El `Reciver` recibe el paquete, extrae el mensaje y lo muestra en la consola, finalizando su ejecución.
 
-
-
 ![](/home/i2t/Git/icesi/2025-2/computacion1/Computacion-1-2025-2/01_udp/doc/grafico.png)
+
+
+
+---
+
+> Este resumen ha sido generado por el modelo LLM de Gemini y revizapor por @njse22 
