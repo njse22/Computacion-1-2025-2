@@ -33,8 +33,6 @@ La interacción es una comunicación unidireccional simple:
 
 ![](/home/i2t/Git/icesi/2025-2/computacion1/Computacion-1-2025-2/01_udp/doc/grafico.png)
 
-
-
 ---
 
-> Este resumen ha sido generado por el modelo LLM de Gemini y revizapor por @njse22 
+> Este resumen ha sido generado por el modelo LLM de Gemini y revisado por @njse22 
