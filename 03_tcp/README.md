@@ -1,6 +1,6 @@
 # Proyecto de Conexión TCP en Java
 
-Este proyecto implementa una conexión TCP básica en Java, demostrando la comunicación entre un cliente y un servidor. Utiliza un enfoque de Singleton para gestionar la conexión y un patrón de Listener para manejar los mensajes entrantes.
+Este proyecto implementa una conexión TCP básica en Java, demostrando la comunicación entre un cliente y un servidor. Utiliza un enfoque de Singleton para gestionar la conexión y un patrón de de *publisher and suscriber* o [*Observer*](https://refactoring.guru/design-patterns/observer)  para manejar los mensajes entrantes.
 
 ## Resumen de `TCPConnection.java`
 
@@ -14,7 +14,7 @@ La clase `util.TCPConnection` es el núcleo de la comunicación en este proyecto
   - La clase hereda de `Thread`. Su método `run()` se encarga de escuchar de forma pasiva los mensajes que llegan a través del socket.
   - Cuando se recibe un mensaje, se notifica a un `Listener` que ha sido registrado.
 - **Envío de Mensajes:**
-  - El método `sendMessage(msj, ipDest, portDest)` permite enviar mensajes. Es importante destacar que para cada envío, se crea un nuevo `Thread` y un nuevo `Socket`, se envía el mensaje y se cierra la conexión. Esto lo hace adecuado para mensajes puntuales más que para un flujo de datos constante.
+  - El método `sendMessage(msj, ipDest, portDest)` permite enviar mensajes. Es importante destacar que para cada envío, se crea un nuevo `Thread` y un nuevo `Socket`, se envía el mensaje y se cierra la conexión. Esto lo hace adecuado para mensajes puntuales más que para un flujo de datos **constante**.
 - **Patrón Listener:**
   - La interfaz interna `TCPConnection.Listener` define un método `onMessage(String msj)`.
   - Las clases interesadas en recibir notificaciones de mensajes (como la UI del servidor) deben implementar esta interfaz y registrarse usando `setListener(listener)`.
@@ -40,6 +40,8 @@ El `Main` del cliente actúa como el emisor del mensaje.
 2. **Envío Directo:** Llama directamente a `connection.sendMessage("Hola desde el cliente", "127.0.0.1", 5000)`. Este método se encarga de crear una conexión temporal con el servidor en la IP y puerto especificados, enviar el mensaje y cerrar la conexión. No necesita llamar a `initAsClient` ni a `start` para este envío puntual.
 
 
+
+## Diagrama del proyecto
 
 ```mermaid
 classDiagram
@@ -67,6 +69,10 @@ classDiagram
     +onMessage(String msj)
   }
 
+  class Listener {
+    +onMessage(String msj)
+  }
+
   %% Connections and Relationships
   TCPConnection "1" o-- "1" Listener : aggregation
   ServerMain ..|> Listener
@@ -77,54 +83,4 @@ classDiagram
 
 
 
-
-
-
-
-## Diagrama UML (PlantUML)
-
-```plantuml
-@startuml
-
-skinparam classAttributeIconSize 0
-
-interface "TCPConnection.Listener" as Listener {
-  + onMessage(String msj)
-}
-
-class TCPConnection <<(S, #ADD1B2) Singleton>> {
-  - static TCPConnection instance
-  - Socket socket
-  - Listener listener
-  --
-  - TCPConnection()
-  + {static} getInstance(): TCPConnection
-  + setListener(Listener listener)
-  + initAsServer(int port)
-  + initAsClient(String ip, int port)
-  + sendMessage(String msj, String ipDest, int portDest)
-  + run()
-}
-
-package client.ui {
-  class ClientMain {
-    + {static} main(String[] args)
-  }
-}
-
-package server.ui {
-  class ServerMain {
-    + {static} main(String[] args)
-    + onMessage(String msj)
-  }
-}
-
-TCPConnection o-- Listener
-ServerMain .u.|> Listener
-ClientMain .u.|> Listener
-
-ClientMain ..> TCPConnection : uses
-ServerMain ..> TCPConnection : uses
-
-@enduml
-```
+> Este resumen fue generado con el modelo LLM de AIG de Gemini y revisado por @njse22
