@@ -6,3 +6,5 @@
  */
 
 rootProject.name = '06_audio'
+include 'server'
+include 'client'
