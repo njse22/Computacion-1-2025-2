@@ -1,0 +1,11 @@
+application {
+    mainClass = "ui.Main"
+}
+
+jar {
+    manifest {
+	attributes 'Main-Class': 'ui.Main'
+    }
+    archiveBaseName = 'server'
+}
+
