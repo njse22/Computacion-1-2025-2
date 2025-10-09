@@ -1,0 +1,74 @@
+.task-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: #fdfdfd;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    cursor: grab;
+    transition: 'transform 0.2s, box-shadow 0.2s';
+}
+
+.group-lists{
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    flex-direction: row;
+    width: 80%;
+    align-items: flex-start;
+    
+}
+
+.task-list-container{
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    width: 33%;
+    min-height: 300px;
+}
+
+.board-task{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+input{
+    width: 500px;
+    padding: 8px;
+    margin: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button{
+    padding: 8px;
+    margin: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.task-item.dragging {
+  opacity: 0.5;
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.task-items.drag-over {
+  background: #f0f8ff;
+  border: 2px dashed #2196f3;
+  transition: 'background 0.3s';
+}
+
+.task-items{
+    min-height: 200px;
+}
+.drag-over-sibling{
+    border-bottom: 4px dashed #21f39c;
+}
