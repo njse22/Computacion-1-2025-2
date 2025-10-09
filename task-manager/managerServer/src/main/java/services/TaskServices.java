@@ -4,8 +4,21 @@ import java.util.List;
 
 import model.Task;
 import model.TaskStage;
+import daos.Dao; 
+import daos.TaskDaoDB; 
+import daos.StageDaoDB;
 
 public class TaskServices {
+
+    private Dao<Task, Integer> repository; 
+    private Dao<TaskStage, Integer> repositoryStage; 
+
+
+    public TaskServices(){
+	repository = new TaskDaoDB(); 
+	repository = new StageDaoDB(); 
+    }
+
 
     public List<TaskStage> getTasks() {
         TaskStage s = new TaskStage();
